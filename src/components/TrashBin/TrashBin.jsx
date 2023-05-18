@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
   position: absolute;
-  left: 60%;
-  bottom: 0;
+  bottom: ${(props) => props.bottom}%;
+  left: ${(props) => props.left}%;
   width: 140px;
 `
 
@@ -12,7 +12,7 @@ const Image = styled.img`
   width: 100%;
 `
 
-function PlasticBin() {
+function PlasticBin({ left, bottom, sourceImg, type }) {
   const handleOnDrop = (e) => {
     // aqui vamos acessar os dados que foram setados no Trash  (na função handleOnDrag)
     const type = e.dataTransfer.getData("type");
@@ -32,12 +32,14 @@ function PlasticBin() {
 
   return (
     <Wrapper
+      bottom={bottom}
+      left={left}
       onDrop={handleOnDrop}
       onDragOver={handleOnDragOver}
     >
       <Image
-        data-type="plastic"
-        src="images/plastic-bin.png"
+        data-type={type}
+        src={sourceImg}
       />
     </Wrapper>
   )

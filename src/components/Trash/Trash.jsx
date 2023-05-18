@@ -12,14 +12,24 @@ const Image = styled.img`
   width: 100%;
 `;
 
-function Trash({ type, sourceImg, top, left }) {
+// podemos setar dados para o objeto que está sendo arrastado usando o dataTransfer
+function Trash({ type, sourceImg, top, left, id }) {
+  const handleOnDrag = (e) => {
+    e.dataTransfer.setData("type", type);
+    e.dataTransfer.setData("elementId", e.target.id);
+    console.log(e.target.id)
+  };
+
   return (
     <Wrapper
-      data-type={type}
       top={top}
       left={left}
     >
       <Image
+        id={id}
+        onDragStart={(e) => handleOnDrag(e)}
+        data-type={type}
+        draggable
         alt={type}
         src={sourceImg}
       />
