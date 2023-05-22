@@ -22,6 +22,12 @@ function App() {
         sourceImg="images/plastic-bin.png"
         type="plastic"
       />
+      <TrashBin 
+        left={30}
+        bottom={0}
+        sourceImg="images/paper-bin.png"
+        type="paper"
+      />
     </Main>
   );
 }
