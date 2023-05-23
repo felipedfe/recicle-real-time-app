@@ -1,21 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Trash from './components/Trash/Trash';
-import PaperBin from './components/PaperBin/PaperBin';
-import PlasticBin from './components/PlasticBin/PlasticBin';
 import TrashBin from './components/TrashBin/TrashBin';
 import { io } from 'socket.io-client';
+import { hideTrash } from './utils/hideTrash';
 import './App.css';
 
 const socket = io('http://localhost:4000');
 
-// console.log(socket);
+// isso é para anular a animação do "fantasma" da imagem quando movemos ela de lugar
+document.ondragover = (e) => {
+  e.preventDefault();
+}
 
 const Main = styled.main`
   width: 100%;
 `;
-
-
 
 function App() {
 
@@ -26,31 +26,23 @@ function App() {
 
     socket.on("hide-trash", (arg) => {
       console.log(arg)
-      const {elementId} = arg;
-      const element = document.getElementById(elementId);
-      element.style.display = "none";
-    })
+      const { elementId } = arg;
+      hideTrash(elementId);
+    });
+
+    // socket.on("image-move", (arg => {
+    //   const { id, clientY, clientX } = arg;
+    //   const element = document.getElementById(id);
+    //   console.log(element.dataset)
+    //   // element.position = { clientY, clientX };
+    // }));
   }, [socket]);
-
-  const sendMessage = () => {
-    // socket.emit("hello", 334);
-    // socket.emit("hello", 667);
-  };
-
-  // socket.on("connection", () => {
-  //   socket.on("hello", (arg) => {
-  //     console.log(arg);
-  //   });
-  // });
-
 
   return (
     <Main>
-      <button onClick={sendMessage}> Send Message</button>
-      <Trash id={1} type="paper" sourceImg="images/paper-1.png" top={5} left={30} socket={socket} />
-      <Trash id={2} type="plastic" sourceImg="images/plastic-1.png" top={15} left={10} socket={socket} />
-      {/* <PaperBin /> */}
-      {/* <PlasticBin /> */}
+      <Trash id={1} type="paper" sourceImg="images/paper-1.png" top={2} left={2} socket={socket} />
+      <Trash id={2} type="plastic" sourceImg="images/plastic-1.png" top={70} left={70} socket={socket} />
+
       <TrashBin
         left={60}
         bottom={0}

@@ -18,7 +18,7 @@ const io = new Server(server, {
 });
 
 // funciona como um EventListener. Sempre que um cliente se conectar ('connection') essa
-// função é disparada.
+// função é disparada. Dentro do connection listamos os eventos a serem ouvidos.
 io.on("connection", (socket) => {
   console.log(`User Connected:`);
 
@@ -31,6 +31,10 @@ io.on("connection", (socket) => {
     console.log(arg);
     socket.broadcast.emit("hide-trash", arg);
   });
+
+  // socket.on("image-move", (arg) => {
+    // socket.broadcast.emit("image-move", arg);
+  // });
 
 });
 
