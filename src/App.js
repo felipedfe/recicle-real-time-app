@@ -23,7 +23,7 @@ function App() {
     socket.on("hello", (arg) => {
       console.log(arg)
     })
-  }, [socket])
+  }, [socket]);
 
   const sendMessage = () => {
     // socket.emit("hello", 334);
