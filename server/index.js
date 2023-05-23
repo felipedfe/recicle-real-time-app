@@ -1,20 +1,32 @@
-import { Server } from 'socket.io';
 const express = require('express');
-const http = require('http');
-
 const app = express();
+const http = require('http');
+const { Server } = require('socket.io');
+const cors = require('cors');
+app.use(cors());
+
 const server = http.createServer(app);
+const PORT = 4000;
 
 // criamos um novo servidor do socket.io. Esse parâmetro do Cors indica que qual um pode
 // fazer requisição para o servidor.
 const io = new Server(server, {
   cors: {
-    origin: "*",
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"],
   },
-})
+});
 
-// fucniona como um EventListener. Sempre que um cliente se conectar ('connection') essa
+// funciona como um EventListener. Sempre que um cliente se conectar ('connection') essa
 // função é disparada.
-io.on('connection', (socket) => {
-  // socket.io
-})
+io.on("connection", (socket) => {
+  console.log(`User Connected:`);
+
+  socket.on("hello", (arg) => {
+    console.log(arg)
+    socket.broadcast.emit("hello", arg)
+  })
+
+});
+
+server.listen(PORT, () => console.log(`connected -> port: ${PORT}`));

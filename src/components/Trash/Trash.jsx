@@ -13,11 +13,14 @@ const Image = styled.img`
 `;
 
 // podemos setar dados para o objeto que está sendo arrastado usando o dataTransfer
-function Trash({ type, sourceImg, top, left, id }) {
+function Trash({ type, sourceImg, top, left, id, socket}) {
   const handleOnDrag = (e) => {
     e.dataTransfer.setData("type", type);
     e.dataTransfer.setData("elementId", e.target.id);
     console.log(e.target.id)
+
+    // console.log(socket)
+    socket.emit("hello", 667);
   };
 
   return (
