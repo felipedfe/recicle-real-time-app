@@ -12,18 +12,20 @@ const Image = styled.img`
   width: 100%;
 `
 
-function PlasticBin({ left, bottom, sourceImg, type }) {
+function PlasticBin({ left, bottom, sourceImg, type, socket }) {
   const handleOnDrop = (e) => {
     // aqui vamos acessar os dados que foram setados no Trash  (na função handleOnDrag)
     const type = e.dataTransfer.getData("type");
+    const elementId = e.dataTransfer.getData("elementId");
 
     // e aqui comparamos o dado transferido como o data-set da lixeira e escondemos
     // o elemento que deu match
     if (type === e.target.dataset.type) {
-      const elementId = e.dataTransfer.getData("elementId");
       const element = document.getElementById(elementId);
       element.style.display = "none";
     };
+
+    socket.emit("hide-trash", { type, elementId })
   };
 
   const handleOnDragOver = (e) => {

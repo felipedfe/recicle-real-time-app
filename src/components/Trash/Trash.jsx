@@ -19,8 +19,13 @@ function Trash({ type, sourceImg, top, left, id, socket}) {
     e.dataTransfer.setData("elementId", e.target.id);
     console.log(e.target.id)
 
+    // const onDragData = {
+    //   type,
+    //   id,
+    // };
+
     // console.log(socket)
-    socket.emit("hello", 667);
+    socket.emit("hello", "TESTE!");
   };
 
   return (

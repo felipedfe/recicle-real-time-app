@@ -22,6 +22,13 @@ function App() {
   useEffect(() => {
     socket.on("hello", (arg) => {
       console.log(arg)
+    });
+
+    socket.on("hide-trash", (arg) => {
+      console.log(arg)
+      const {elementId} = arg;
+      const element = document.getElementById(elementId);
+      element.style.display = "none";
     })
   }, [socket]);
 
@@ -49,12 +56,14 @@ function App() {
         bottom={0}
         sourceImg="images/plastic-bin.png"
         type="plastic"
+        socket={socket}
       />
       <TrashBin
         left={30}
         bottom={0}
         sourceImg="images/paper-bin.png"
         type="paper"
+        socket={socket}
       />
     </Main>
   );

@@ -23,9 +23,14 @@ io.on("connection", (socket) => {
   console.log(`User Connected:`);
 
   socket.on("hello", (arg) => {
-    console.log(arg)
+    console.log(arg);
     socket.broadcast.emit("hello", arg)
-  })
+  });
+
+  socket.on("hide-trash", (arg) => {
+    console.log(arg);
+    socket.broadcast.emit("hide-trash", arg);
+  });
 
 });
 
