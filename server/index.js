@@ -32,6 +32,8 @@ io.on("connection", (socket) => {
     socket.broadcast.emit("hide-trash", arg);
   });
 
+  socket.on("opponent-scored", (arg) => socket.broadcast.emit("opponent-scored", arg));
+
   // socket.on("image-move", (arg) => {
     // socket.broadcast.emit("image-move", arg);
   // });

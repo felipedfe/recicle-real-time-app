@@ -18,6 +18,8 @@ const Main = styled.main`
 `;
 
 function App() {
+  const [yourScore, setYourScore] = useState(0);
+  const [opponentScore, setOpponentScore] = useState(0);
 
   useEffect(() => {
     socket.on("hello", (arg) => {
@@ -30,6 +32,10 @@ function App() {
       hideTrash(elementId);
     });
 
+    socket.on("opponent-scored", (arg) => {
+      setOpponentScore(arg);
+    });
+
     // socket.on("image-move", (arg => {
     //   const { id, clientY, clientX } = arg;
     //   const element = document.getElementById(id);
@@ -40,14 +46,21 @@ function App() {
 
   return (
     <Main>
-      <Trash id={1} type="paper" sourceImg="images/paper-1.png" top={2} left={2} socket={socket} />
-      <Trash id={2} type="plastic" sourceImg="images/plastic-1.png" top={70} left={70} socket={socket} />
+      <section>
+        Pontuação:
+        <p>Você - {yourScore}</p>
+        <p>Oponente - {opponentScore}</p>
+      </section>
+      <Trash id={1} type="paper" sourceImg="images/paper-1.png" top={50} left={2} socket={socket} />
+      <Trash id={2} type="plastic" sourceImg="images/plastic-1.png" top={70} left={300} socket={socket} />
 
       <TrashBin
         left={60}
         bottom={0}
         sourceImg="images/plastic-bin.png"
         type="plastic"
+        yourScore={yourScore}
+        setYourScore={setYourScore}
         socket={socket}
       />
       <TrashBin
@@ -55,6 +68,8 @@ function App() {
         bottom={0}
         sourceImg="images/paper-bin.png"
         type="paper"
+        yourScore={yourScore}
+        setYourScore={setYourScore}
         socket={socket}
       />
     </Main>

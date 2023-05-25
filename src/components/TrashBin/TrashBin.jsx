@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { hideTrash } from '../../utils/hideTrash';
 
@@ -30,7 +30,7 @@ const Image = styled.img`
   }
 `
 
-function PlasticBin({ left, bottom, sourceImg, type, socket }) {
+function PlasticBin({ left, bottom, sourceImg, type, socket, yourScore, setYourScore }) {
   const initialState = {
     on: false,
     type: "",
@@ -47,12 +47,15 @@ function PlasticBin({ left, bottom, sourceImg, type, socket }) {
     // e aqui comparamos o dado transferido como o data-set da lixeira e escondemos
     // o elemento que deu match
     if (type === e.target.dataset.type) {
+      setYourScore((prevState) => prevState + 1);
       hideTrash(elementId);
       setDropAnimation({
         on: true,
         type: "positive",
       });
       setTimeout(() => setDropAnimation(initialState), 500);
+      socket.emit("hide-trash", { type, elementId })
+      setOver(false);
     } else {
       setDropAnimation({
         on: true,
@@ -60,9 +63,6 @@ function PlasticBin({ left, bottom, sourceImg, type, socket }) {
       });
       setTimeout(() => setDropAnimation(initialState), 500);
     };
-
-    socket.emit("hide-trash", { type, elementId })
-    setOver(false);
   };
 
   const handleOnDragOver = (e) => {
@@ -74,7 +74,9 @@ function PlasticBin({ left, bottom, sourceImg, type, socket }) {
     setOver(false);
   };
 
-  console.log(dropAnimation)
+  useEffect(() => {
+    socket.emit("opponent-scored", yourScore);
+  }, [yourScore]);
 
   // o dollar sign nas propriedades $over e $dropAnimation serve pra diferenciar 
   // uma prop de um styled component de uma propriedade do DOM
