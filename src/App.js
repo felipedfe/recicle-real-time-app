@@ -10,7 +10,7 @@ const socket = io('http://localhost:4000');
 
 // isso é para anular a animação do "fantasma" da imagem quando movemos ela de lugar
 document.ondragover = (e) => {
-  e.preventDefault();
+  // e.preventDefault();
 }
 
 const Main = styled.main`
