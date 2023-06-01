@@ -7,7 +7,7 @@ const Wrapper = styled.div`
   bottom: ${(props) => props.bottom}%;
   left: ${(props) => props.left}%;
   border: solid 2px ${(props) => props.$over ? "#000" : "transparent"};
-  width: 140px;
+  width: 125px;
   border-radius: 5px;
 `
 
@@ -30,7 +30,17 @@ const Image = styled.img`
   }
 `
 
-function PlasticBin({ left, bottom, sourceImg, type, socket, yourScore, setYourScore }) {
+function TrashBin(
+  { left,
+    bottom,
+    sourceImg,
+    type,
+    socket,
+    yourScore,
+    setYourScore,
+  }
+) {
+
   const initialState = {
     on: false,
     type: "",
@@ -54,8 +64,7 @@ function PlasticBin({ left, bottom, sourceImg, type, socket, yourScore, setYourS
         type: "positive",
       });
       setTimeout(() => setDropAnimation(initialState), 500);
-      socket.emit("hide-trash", { type, elementId })
-      setOver(false);
+      socket.emit("hide-trash", { type, elementId });
     } else {
       setDropAnimation({
         on: true,
@@ -63,6 +72,7 @@ function PlasticBin({ left, bottom, sourceImg, type, socket, yourScore, setYourS
       });
       setTimeout(() => setDropAnimation(initialState), 500);
     };
+    setOver(false);
   };
 
   const handleOnDragOver = (e) => {
@@ -88,7 +98,6 @@ function PlasticBin({ left, bottom, sourceImg, type, socket, yourScore, setYourS
       onDragOver={handleOnDragOver}
       onDragLeave={handleDragLeave}
       $over={over}
-    // $dropAnimation={dropAnimation}
     >
       <Image
         data-type={type}
@@ -99,4 +108,4 @@ function PlasticBin({ left, bottom, sourceImg, type, socket, yourScore, setYourS
   )
 };
 
-export default PlasticBin;
+export default TrashBin;

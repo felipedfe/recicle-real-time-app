@@ -20,22 +20,22 @@ const io = new Server(server, {
 // funciona como um EventListener. Sempre que um cliente se conectar ('connection') essa
 // função é disparada. Dentro do connection listamos os eventos a serem ouvidos.
 io.on("connection", (socket) => {
-  console.log(`User Connected:`);
-
-  socket.on("hello", (arg) => {
-    console.log(arg);
-    socket.broadcast.emit("hello", arg)
-  });
+  console.log("User Connected!");
 
   socket.on("hide-trash", (arg) => {
-    console.log(arg);
     socket.broadcast.emit("hide-trash", arg);
   });
 
-  socket.on("opponent-scored", (arg) => socket.broadcast.emit("opponent-scored", arg));
+  socket.on("opponent-scored", (arg) => {
+    socket.broadcast.emit("opponent-scored", arg);
+  });
+
+  socket.on("update-trash-left", (arg) => {
+    socket.broadcast.emit("update-trash-left", arg);
+  });
 
   // socket.on("image-move", (arg) => {
-    // socket.broadcast.emit("image-move", arg);
+  // socket.broadcast.emit("image-move", arg);
   // });
 
 });
