@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as s from './Trash.styled';
 
 // podemos setar dados para o objeto que está sendo arrastado usando o dataTransfer
-function Trash({ type, sourceImg, top, left, id, socket }) {
+function Trash({ type, sourceImg, top, left, id }) {
   const [position, setPosition] = useState({ top, left })
 
   // naturalWidth é o tamanho orginal em pixels da imagem. Com ele podemos diminuir as imagens em %
