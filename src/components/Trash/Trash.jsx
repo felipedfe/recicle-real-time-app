@@ -1,32 +1,12 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
-
-const Wrapper = styled.div`
-  position: relative;
-
-  top: ${(props) => props.position.top}%;
-  left: ${(props) => props.position.left}%;
-
-  /* width: ${(props) => props.width}px; */
-  /* max-width: 140px; */
-  width: ${(props) => props.width}px;
-`;
-
-const Image = styled.img`
-  position: absolute; 
-  /* top: ${(props) => props.position.top}%;
-  left: ${(props) => props.position.left}%; */
-  width: 80%;
-  /* margin: auto; */
-`;
+import * as s from './Trash.styled';
 
 // podemos setar dados para o objeto que está sendo arrastado usando o dataTransfer
 function Trash({ type, sourceImg, top, left, id, socket }) {
   const [position, setPosition] = useState({ top, left })
 
+  // naturalWidth é o tamanho orginal em pixels da imagem. Com ele podemos diminuir as imagens em %
   const naturalWidth = document.getElementById(id)?.naturalWidth;
-  // const teste = naturalWidth?.naturalWidth;
-  console.log("-----", naturalWidth)
 
   const handleOnDrag = (e) => {
     e.dataTransfer.setData("type", type);
@@ -39,11 +19,12 @@ function Trash({ type, sourceImg, top, left, id, socket }) {
   //   socket.emit("image-move", ({id, clientX, clientY, setPosition}));
   // };
 
-  // console.log(position)
-
   return (
-    <Wrapper width={naturalWidth} position={position}>
-      <Image
+    <s.Wrapper
+      width={naturalWidth}
+      position={position}
+    >
+      <s.Image
         className="trash"
         id={id}
         onDragStart={(e) => handleOnDrag(e)}
@@ -52,9 +33,8 @@ function Trash({ type, sourceImg, top, left, id, socket }) {
         draggable
         alt={type}
         src={sourceImg}
-        position={position}
       />
-    </Wrapper>
+    </s.Wrapper>
   );
 }
 

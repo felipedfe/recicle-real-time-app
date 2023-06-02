@@ -13,6 +13,11 @@ export const GlobalStyles = createGlobalStyle`
     --color-logo: #e67070;
     --color-score-box: #f6d095;
     --color-score: #2f2f2f;
+    --color-body: #cdcdcd
+  }
+
+  body {
+    background-color: var(--color-body);
   }
 
 `

@@ -15,12 +15,7 @@ document.ondragover = (e) => {
 }
 
 const Main = styled.main`
-  /* background-color: var(--color-bg); */
   width: 100%;
-  /* height: 100vh; */
-  /* max-width: 1400px; */
-  /* max-height: 800px; */
-  /* margin: auto; */
 `;
 
 const Board = styled.section`
@@ -40,8 +35,6 @@ const RecicleLogo = styled.span`
   font-size: 13rem;
   font-weight: 700;
   color: var(--color-logo);
-  /* z-index: 2; */
-
 `
 
 const ScoreSection = styled.section`
@@ -50,9 +43,7 @@ const ScoreSection = styled.section`
   justify-content: space-around;
   position: absolute;
   z-index: 1;
-  /* background-color: aqua; */
   width: 100%;
-  /* max-width: 1400px; */
   height: 4.5rem;
 `
 
@@ -62,15 +53,10 @@ const ScoreBox = styled.div`
   padding: 0.3rem;
   text-align: center;
   color: var(--color-score);
-  /* font-weight: 700; */
 `
 
 const TrashSection = styled.section`
   position: relative;
-  /* background-color: #f98383; */
-  /* background-color: var(--color-bg); */
-  /* height: 92vh; */
-  /* max-height: 800px; */
   padding-top: 4.5rem;
   height: 100%;
 `
@@ -81,12 +67,6 @@ const TrashBinSection = styled.section`
   left: 50%;
   transform: translate(-50%, -25%);
   display: flex;
-  /* position: relative; */
-  /* height: 100vh; */
-  /* width: 500px;
-  height: 300px; */
-  /* background-color: aqua; */
-  /* z-index: 3; */
 `
 
 function App() {
