@@ -3,9 +3,6 @@ import styled from 'styled-components';
 import { hideTrash } from '../../utils/hideTrash';
 
 const Wrapper = styled.div`
-  position: absolute;
-  bottom: ${(props) => props.bottom}%;
-  left: ${(props) => props.left}%;
   border: solid 2px ${(props) => props.$over ? "#000" : "transparent"};
   width: 125px;
   border-radius: 5px;
@@ -20,9 +17,13 @@ const Image = styled.img`
   border-radius: 5px;
 
   @keyframes positive {
-    0%{background-color: #3fc451;}
-    100%{background-color: #fff;}
+    0%{border: solid 3px #1bb32f;}
+    100%{border: solid 3px #fff;}
   }
+  /* @keyframes positive {
+    0%{filter: drop-shadow(3px 3px 1rem #3fc451);}
+    100%{filter: drop-shadow(3px 3px 1rem #fff);}
+  } */
 
   @keyframes negative {
     0%{background-color: #e01111;}
@@ -31,8 +32,7 @@ const Image = styled.img`
 `
 
 function TrashBin(
-  { left,
-    bottom,
+  { 
     sourceImg,
     type,
     socket,
@@ -92,8 +92,6 @@ function TrashBin(
   // uma prop de um styled component de uma propriedade do DOM
   return (
     <Wrapper
-      bottom={bottom}
-      left={left}
       onDrop={handleOnDrop}
       onDragOver={handleOnDragOver}
       onDragLeave={handleDragLeave}

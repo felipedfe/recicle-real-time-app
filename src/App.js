@@ -18,38 +18,75 @@ const Main = styled.main`
   /* background-color: var(--color-bg); */
   width: 100%;
   /* height: 100vh; */
-  max-width: 1400px;
-  max-height: 800px;
-  margin: auto;
+  /* max-width: 1400px; */
+  /* max-height: 800px; */
+  /* margin: auto; */
 `;
 
 const Board = styled.section`
+  position: relative;
   height: 100vh;
+  max-height: 800px;
+  max-width: 1400px;
+  margin: auto;
+  background-color: var(--color-bg);
+`
+
+const RecicleLogo = styled.span`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-90%);
+  font-size: 13rem;
+  font-weight: 700;
+  color: var(--color-logo);
+  /* z-index: 2; */
 
 `
 
 const ScoreSection = styled.section`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
   position: absolute;
   z-index: 1;
   /* background-color: aqua; */
   width: 100%;
-  max-width: 1400px;
-  height: 4rem;
+  /* max-width: 1400px; */
+  height: 4.5rem;
+`
+
+const ScoreBox = styled.div`
+  background-color: var(--color-score-box);
+  width: 200px;
+  padding: 0.3rem;
+  text-align: center;
+  color: var(--color-score);
+  /* font-weight: 700; */
 `
 
 const TrashSection = styled.section`
   position: relative;
   /* background-color: #f98383; */
-  background-color: var(--color-bg);
+  /* background-color: var(--color-bg); */
   /* height: 92vh; */
   /* max-height: 800px; */
-  padding-top: 4rem;
+  padding-top: 4.5rem;
   height: 100%;
 `
 
 const TrashBinSection = styled.section`
-  position: relative;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -25%);
+  display: flex;
+  /* position: relative; */
   /* height: 100vh; */
+  /* width: 500px;
+  height: 300px; */
+  /* background-color: aqua; */
+  /* z-index: 3; */
 `
 
 function App() {
@@ -101,25 +138,29 @@ function App() {
     <>
       <GlobalStyles />
       <Main>
-        <ScoreSection>
-          Pontuação:
-          <p>Você - {yourScore}</p>
-          <p>Oponente - {opponentScore}</p>
-        </ScoreSection>
         <Board>
+          <RecicleLogo>Recicle</RecicleLogo>
+          <ScoreSection>
+            <ScoreBox>
+              Você : {yourScore}
+            </ScoreBox>
+            <ScoreBox>
+              Oponente : {opponentScore}
+            </ScoreBox>
+          </ScoreSection>
           <TrashSection>
-            <Trash id={2} type="plastic" sourceImg="images/plastic/garrafa-pet.png" top={10} left={10} socket={socket} />
+            <Trash id={2} type="plastic" sourceImg="images/plastic/garrafa-pet.png" top={10} left={13} socket={socket} />
             <Trash id={10} type="plastic" sourceImg="images/plastic/saco.png" top={45} left={5} socket={socket} />
             <Trash id={13} type="plastic" sourceImg="images/plastic/amaciante.png" top={10} left={80} socket={socket} />
             <Trash id={1} type="paper" sourceImg="images/paper/papel.png" top={3} left={45} socket={socket} />
             <Trash id={15} type="paper" sourceImg="images/paper/caixa.png" top={0} left={20} socket={socket} />
             <Trash id={16} type="paper" sourceImg="images/paper/jornal.png" top={25} left={5} socket={socket} />
-            <Trash id={3} type="not-recyclable" sourceImg="images/not-recyclable/spray.png" top={5} left={30} socket={socket} />
+            <Trash id={3} type="not-recyclable" sourceImg="images/not-recyclable/spray.png" top={0} left={35} socket={socket} />
             <Trash id={4} type="not-recyclable" sourceImg="images/not-recyclable/oculos.png" top={40} left={10} socket={socket} />
             <Trash id={9} type="not-recyclable" sourceImg="images/not-recyclable/esponja.png" top={70} left={5} socket={socket} />
             <Trash id={6} type="not-recyclable" sourceImg="images/not-recyclable/lata-tinta.png" top={5} left={90} socket={socket} />
             <Trash id={12} type="not-recyclable" sourceImg="images/not-recyclable/porcelana.png" top={5} left={75} socket={socket} />
-            <Trash id={1} type="not-recyclable" sourceImg="images/not-recyclable/clipes.png" top={0} left={55} socket={socket} />
+            <Trash id={17} type="not-recyclable" sourceImg="images/not-recyclable/clipes.png" top={0} left={55} socket={socket} />
             <Trash id={5} type="metal" sourceImg="images/metal/lata-refri.png" top={0} left={70} socket={socket} />
             <Trash id={11} type="metal" sourceImg="images/metal/ferramenta.png" top={70} left={80} socket={socket} />
             <Trash id={8} type="metal" sourceImg="images/metal/parafusos.png" top={35} left={80} socket={socket} />
@@ -128,8 +169,6 @@ function App() {
           </TrashSection>
           <TrashBinSection>
             <TrashBin
-              left={60}
-              bottom={0}
               sourceImg="images/trash-bins/plastico.png"
               type="plastic"
               yourScore={yourScore}
@@ -137,8 +176,6 @@ function App() {
               socket={socket}
             />
             <TrashBin
-              left={30}
-              bottom={0}
               sourceImg="images/trash-bins/papel.png"
               type="paper"
               yourScore={yourScore}
@@ -146,8 +183,6 @@ function App() {
               socket={socket}
             />
             <TrashBin
-              left={50}
-              bottom={0}
               sourceImg="images/trash-bins/metal.png"
               type="metal"
               yourScore={yourScore}
@@ -155,8 +190,6 @@ function App() {
               socket={socket}
             />
             <TrashBin
-              left={70}
-              bottom={0}
               sourceImg="images/trash-bins/vidro.png"
               type="glass"
               yourScore={yourScore}
@@ -164,8 +197,6 @@ function App() {
               socket={socket}
             />
             <TrashBin
-              left={80}
-              bottom={0}
               sourceImg="images/trash-bins/nao-reciclavel.png"
               type="not-recyclable"
               yourScore={yourScore}
