@@ -1,5 +1,5 @@
 # Recicle
-<img src="https://raw.githubusercontent.com/felipedfe/felipedfe/main/assets/recicle-print.png" alt="tela da aplicação" width="800">
+<img src="https://raw.githubusercontent.com/felipedfe/felipedfe/main/assets/reclice-print.png" alt="tela da aplicação" width="800">
 
 ## •Description
 I wanted to make an application that two people could access at the same time from different browsers. Players must try to put the garbage scattered in the correct bins and for each hit, one point is added to each player's score at the top of the screen. I used the __Socket.IO__ library to make this real time application. 
